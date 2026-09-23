@@ -1,0 +1,9 @@
+jobname = example
+seqfile = example.phy
+stree = A B C
+nloci = 1000
+RV = 1
+run = 2
+repeat = 3
+model = B 2 3
+nthreads = 4
