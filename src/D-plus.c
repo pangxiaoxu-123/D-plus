@@ -133,16 +133,20 @@ int main(int argc, char *argv[]) {
 	fprintf(stderr,"\tseqfile  = %s\n", config.seqfile);
 	fprintf(stderr,"\tstree    = %s %s %s\n", config.s1, config.s2, config.o);
 	fprintf(stderr,"\trepeat   = %d\n", config.repeat);
-	fprintf(stderr,"\tevent    = %d %d %d\n", config.event[0],config.event[1],config.event[2]);
-	if(config.run<2 && config.model>0) fprintf(stderr,"\tmodel   = M%d\n", config.model);
+	if(config.run<2 && config.model>0){
+		fprintf(stderr,"\tmodel    = M%d\n", config.model);
+		fprintf(stderr,"\tevent    = %d %d %d\n", config.event[0],config.event[1],config.event[2]);
+	}
 	fprintf(stderr,"\tnthreads = %d\n", config.nthreads);
 	fprintf(fout,"Parsed ctl file:\n");
 	fprintf(fout,"\toutfile  = %s.out\n", config.jobname);
 	fprintf(fout,"\tseqfile  = %s\n", config.seqfile);
 	fprintf(fout,"\tstree    = %s %s %s\n", config.s1, config.s2, config.o);
 	fprintf(fout,"\trepeat   = %d\n", config.repeat);
-	fprintf(fout,"\tevent    = %d %d %d\n", config.event[0],config.event[1],config.event[2]);
-	if(config.run<2 &&  config.model>0) fprintf(fout,"\tmodel   = M%d\n", config.model);
+	if(config.run<2 && config.model>0){
+		fprintf(fout,"\tmodel    = M%d\n", config.model);
+		fprintf(fout,"\tevent    = %d %d %d\n", config.event[0],config.event[1],config.event[2]);
+	}
 	fprintf(fout,"\tnthreads = %d\n", config.nthreads);
 
 	starttimer();   
@@ -302,7 +306,7 @@ int parse_ctl_file(const char *filename, CtlConfig *config) {
 				}
 				switch (event.e) {
 					case 'G':
-						if (event.from == 1 && event.to < 3) {
+						if (event.from == 0 && event.to < 3) {
 							config->event[0] = 1; //ghost-flow
 							if (event.to == 2) valid_G = 1;
 						} else {
